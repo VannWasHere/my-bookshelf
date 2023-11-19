@@ -1,13 +1,15 @@
 const bookshelf = [];
+const bookFounded = [];
 const REFRESH_EVENT = 'refresh_event';
+const FINDEVENT = 'search_event';
 
 // Storage Key
-const SAVED_EVENT = 'saved-changes';
 const STORAGE_KEY = 'BOOKVAULT';
 
 // Declare needed variable
 const form = document.getElementById('input-book');
 const input_complete = document.getElementById('finish-reading');
+const search_button = document.getElementById('submit-user-search');
 
 // Load Document when content ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,6 +22,30 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('book-release').value = "";
     });
 });
+
+// Event Click seacrh button
+search_button.addEventListener('click', () => {
+    const userSearch = document.getElementById('user-search').value;
+    findBook(userSearch);
+});
+
+// Searching Book
+const findBook = (userSearch) => {
+    for (const item of bookshelf) {
+        if (item.title.toLowerCase().includes(userSearch.toLowerCase()) || item.author.toLowerCase().includes(userSearch.toLowerCase())) {
+            bookFounded.push(item);
+        }
+    }
+    document.dispatchEvent(new Event(FINDEVENT));
+    bookFounded.length = 0;
+}
+
+const getBookFromSearch = (userSearch) => {
+    for(const item of bookshelf) {
+        if(item.userSearch == userSearch) return item;
+    }
+    return null;
+}
 
 // LocalStorage
 const saveChanges = () => {
@@ -194,7 +220,19 @@ document.addEventListener(REFRESH_EVENT, () => {
     }
 });
 
-// Save Data Event
-document.addEventListener(SAVED_EVENT, () => {
-    console.log(localStorage.getItem(STORAGE_KEY));
-});
+document.addEventListener(FINDEVENT, () => {
+    const unread = document.getElementById('unread')
+    unread.innerHTML = "";
+
+    const read = document.getElementById('read');
+    read.innerHTML = "";
+
+    for(const item of bookFounded) {
+        const nodeCreated = makeList(item);
+        if(item.isComplete) {
+            read.append(nodeCreated);
+        } else {
+            unread.append(nodeCreated);
+        }
+    }
+})
