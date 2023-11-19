@@ -96,7 +96,7 @@ const insertInput = () => {
     const id = generateID();
     const input_title = document.getElementById('book-title').value;
     const input_author = document.getElementById('author-input').value;
-    const input_year = document.getElementById('book-release').value;
+    const input_year = parseInt(document.getElementById('book-release').value);
     
     //Check if checked 
     let isComplete = false;
@@ -204,6 +204,7 @@ const removeBook = (id) => {
 
 // Refreshing Event
 document.addEventListener(REFRESH_EVENT, () => {
+    console.log(bookshelf);
     const unread = document.getElementById('unread')
     unread.innerHTML = "";
 
