@@ -7,8 +7,68 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- My Code -->
+    <header>
+        <nav>
+            <h1>Bookshelf</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <!-- Search section -->
+            <section class="search-section">
+                <input type="text" id="user-search" autocomplete="off" placeholder="Search Your Books">
+                <button type="button" id="submit-user-search">Search</button>
+            </section>
 
+            <!-- Flex Content Container -->
+            <div class="content-container">
+
+                <section class="input-section">
+                    <form id="input-book" autocomplete="off">
+                        <h2>Input Book</h2>
+                        <div class="input-group">
+                            <label for="book-title">Book Title</label> <br>
+                            <input type="text" id="book-title" required placeholder="Book Title">
+                        </div>
+                        <div class="input-group">
+                            <label for="author-input">Author</label> <br>
+                            <input type="text" id="author-input" required placeholder="Author">
+                        </div>
+                        <div class="input-group">
+                            <label for="book-release">Book Release</label> <br>
+                            <input type="number" id="book-release" required placeholder="Publish Year">
+                        </div>
+                        <div class="input-group last">
+                            <label for="finish-reading">Done Reading?</label>
+                            <input type="checkbox" id="finish-reading">
+                        </div>
+                        <button type="submit" id="submit-book">Add Book</button>
+                    </form>
+                </section>
+
+                <section class="reading-section">
+                    <h2>In Progress</h2>
+                    <!-- <div class="inner">
+                        <div class="inner-container">
+                            <h2 class="inner-title">Title</h2>
+                            <h4 class="inner-author">Author</h4>
+                            <p class="inner-date">2023</p>
+                        </div>
+                        <div class="inner-button-container">
+                            <button class="finish-read inner-button">hello</button>
+                            <button class="delete-book inner-button">Delete</button>
+                        </div>
+                    </div> -->
+                </section>
+
+                <section class="finish-section">
+                    <h2>Done Reading</h2>
+
+                </section>
+                
+            </div>
+        </div>
+    </main>
     <script src="js/script.js"></script>
 </body>
 </html>

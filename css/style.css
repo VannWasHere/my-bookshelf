@@ -5,6 +5,160 @@
     box-sizing: border-box;
 }
 
+:root {
+    --main-color: #F6F4EB;
+    --sec-color: #91C8E4;
+    --third-color: #749BC2;
+    --fourth-color: #4682A9;
+    --button-color: #59CE8F;
+    --button2-color: #52c889;
+    --text-color: #fff;
+    --shadow1 : 3px 3px 1px 0px #2f688e;
+    --shadow2 : 3px 3px 1px 0px #749BC2;
+    --shadow3 : 3px 3px 1px 0px #47aa75;
+}
+
 body {
-    font-family: 'Kanit', sans-serif
+    font-family: 'Kanit', sans-serif;
+    background-color: var(--main-color);
+}
+
+nav {
+    padding: 20px;
+    background-color: #245779;
+    color: var(--text-color);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+nav h1 {
+    cursor: pointer;
+}
+
+input {
+    border: none;
+    background-color: var(--fourth-color);
+    box-shadow: var(--shadow1);
+    color: #fff;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::placeholder {
+    color: #e1dcdc;
+}
+
+button {
+    background-color: var(--button-color);
+    border: none;
+    color: var(--main-color);
+    cursor: pointer;
+    box-shadow: var(--shadow3);
+    transition: 0.3s all ease;
+}
+
+button:hover {
+    background-color: var(--button2-color);
+    box-shadow: var(--shadow3);
+}
+
+.container {
+    width: 100%;
+    padding: 20px;
+}
+
+.search-section {
+    display: flex;
+    justify-content: center;
+}
+
+.search-section input {
+    padding: 8px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+#submit-user-search {
+    width: 70px;
+    padding: 10px;
+}
+
+.content-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 80px;
+}
+
+.content-container>section {
+    width: 100%;
+    height: max-content;
+    padding: 15px;
+    box-shadow: var(--shadow2);
+}
+
+.content-container>section:not(:nth-child(1)) {
+    margin-left: 50px;
+}
+
+#input-book>div{
+    margin-top: 15px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.last {
+    display: flex;
+    align-items: center;
+}
+
+.input-group>input[type=text],
+.input-group > input[type=number] {
+    width: 100%;
+    padding: 10px;
+}
+
+.input-group input[type=checkbox] {
+    box-shadow: none;
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
+    padding-left: 120px;
+    margin-left: 7px;
+}
+
+#submit-book {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+}
+
+.inner {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: var(--third-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow1);
+}
+
+.inner-button {
+    padding: 5px;
+    width: 60px;
+}
+
+.delete-book {
+    background-color: rgb(197, 40, 40);
+    margin-left: 5px;
+    box-shadow: 3px 3px 1px 0px rgb(77, 3, 3);
+}
+
+.delete-book:hover {
+    background-color: red;
+    box-shadow: 3px 3px 1px 0px rgb(77, 3, 3);
 }
