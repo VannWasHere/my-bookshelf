@@ -86,6 +86,7 @@ button:hover {
 }
 
 .content-container {
+    position: relative;
     display: flex;
     width: 100%;
     justify-content: space-around;
@@ -103,7 +104,18 @@ button:hover {
 }
 
 .input-section {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     box-shadow: var(--shadow2);
+}
+
+.sticky-heading {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: var(--main-color);
 }
 
 #input-book>div{
@@ -148,6 +160,18 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     box-shadow: var(--shadow1);
+    width: 95%;
+}
+
+.inner-container {
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.inner-button-container {
+    margin-left: 20px;
+    flex-shrink: 0; 
 }
 
 .inner-button {

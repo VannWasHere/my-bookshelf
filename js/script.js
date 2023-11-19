@@ -67,7 +67,7 @@ const makeList = (bookshelfObject) => {
     const buttonContainer = document.createElement('div')
     buttonContainer.classList.add('inner-button-container');
 
-    const titleElement = document.createElement('h2');
+    const titleElement = document.createElement('h3');
     titleElement.classList.add('inner-title');
     titleElement.innerText = bookshelfObject.title;
 
@@ -76,8 +76,8 @@ const makeList = (bookshelfObject) => {
     authorElement.innerText = bookshelfObject.author;
 
     const yearElement = document.createElement('p');
-    year.classList.add('inner-date');
-    year.innerText = bookshelfObject.year;
+    yearElement.classList.add('inner-date');
+    yearElement.innerText = bookshelfObject.year;
 
     inner.append(titleElement, authorElement, yearElement);
     
@@ -108,10 +108,27 @@ const makeList = (bookshelfObject) => {
     deleteButton.classList.add('delete-book');  
     deleteButton.classList.add('inner-button');
     deleteButton.innerText = 'Delete Book';
+    buttonContainer.append(deleteButton);
 
-    container.append(inner)
+    container.append(inner, buttonContainer);
+
+    return container;
 }
 
 document.addEventListener(REFRESH_EVENT, () => {
     console.log(bookshelf);
+    const unread = document.getElementById('unread')
+    unread.innerHTML = "";
+
+    const read = document.getElementById('read');
+    read.innerHTML = "";
+
+    for(const item of bookshelf) {
+        const nodeCreated = makeList(item);
+        if(item.isComplete) {
+            read.append(nodeCreated);
+        } else {
+            unread.append(nodeCreated);
+        }
+    }
 });
