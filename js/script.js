@@ -56,6 +56,61 @@ const insertInput = () => {
     document.dispatchEvent(new Event(REFRESH_EVENT));
 }
 
+const makeList = (bookshelfObject) => {
+    // Create Container Element
+    const container = document.createElement('div');
+    container.classList.add('outter');
+
+    const inner = document.createElement('div');
+    inner.classList.add('inner-container');
+
+    const buttonContainer = document.createElement('div')
+    buttonContainer.classList.add('inner-button-container');
+
+    const titleElement = document.createElement('h2');
+    titleElement.classList.add('inner-title');
+    titleElement.innerText = bookshelfObject.title;
+
+    const authorElement = document.createElement('h4');
+    authorElement.classList.add('inner-author');
+    authorElement.innerText = bookshelfObject.author;
+
+    const yearElement = document.createElement('p');
+    year.classList.add('inner-date');
+    year.innerText = bookshelfObject.year;
+
+    inner.append(titleElement, authorElement, yearElement);
+    
+    // Check if complete or not
+    if(bookshelfObject.isComplete) {
+        const checkButton = document.createElement('button');
+        checkButton.classList.add('finish-read');  
+        checkButton.classList.add('inner-button');
+        checkButton.innerText = 'Unread Book';
+        buttonContainer.append(checkButton);
+
+        checkButton.addEventListener('click', () => {
+            moveToUnread(bookshelfObject.id);
+        });
+    } else {
+        const checkButton = document.createElement('button');
+        checkButton.classList.add('finish-read');  
+        checkButton.classList.add('inner-button');
+        checkButton.innerText = 'Finish Read';
+        buttonContainer.append(checkButton);
+
+        checkButton.addEventListener('click', () => {
+            moveToRead(bookshelfObject.id);
+        });
+    }
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-book');  
+    deleteButton.classList.add('inner-button');
+    deleteButton.innerText = 'Delete Book';
+
+    container.append(inner)
+}
 
 document.addEventListener(REFRESH_EVENT, () => {
     console.log(bookshelf);
