@@ -101,6 +101,7 @@ const makeList = (bookshelfObject) => {
 
         checkButton.addEventListener('click', () => {
             moveToRead(bookshelfObject.id);
+            checkButton.innerText = 'Unread Book';
         });
     }
 
@@ -108,6 +109,10 @@ const makeList = (bookshelfObject) => {
     deleteButton.classList.add('delete-book');  
     deleteButton.classList.add('inner-button');
     deleteButton.innerText = 'Delete Book';
+
+    deleteButton.addEventListener('click', () => {
+        removeBook(bookshelfObject.id);
+    })
     buttonContainer.append(deleteButton);
 
     container.append(inner, buttonContainer);
@@ -115,8 +120,28 @@ const makeList = (bookshelfObject) => {
     return container;
 }
 
+const moveToRead = (id) => {
+    const target = getItem(id);
+    if(target == null) return;
+    target.isComplete = true;
+    document.dispatchEvent(new Event(REFRESH_EVENT));
+};
+
+const moveToUnread = (id) => {
+    const target = getItem(id);
+    if(target == null) return;
+    target.isComplete = false;
+    document.dispatchEvent(new Event(REFRESH_EVENT));
+};
+
+const removeBook = (id) => {
+    const target = getId(id);
+    if(target == null) return;
+    bookshelf.splice(target, 1);
+    document.dispatchEvent(new Event(REFRESH_EVENT));
+}
+
 document.addEventListener(REFRESH_EVENT, () => {
-    console.log(bookshelf);
     const unread = document.getElementById('unread')
     unread.innerHTML = "";
 

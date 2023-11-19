@@ -16,6 +16,7 @@
     --shadow1 : 3px 3px 1px 0px #2f688e;
     --shadow2 : 3px 3px 1px 0px #749BC2;
     --shadow3 : 3px 3px 1px 0px #47aa75;
+    --shadow4 : 3px 3px 1px 0px #385938;
 }
 
 body {
@@ -152,6 +153,12 @@ button:hover {
     margin-top: 12px;
 }
 
+#read>div{
+    background-color: #557C55;
+    box-shadow: var(--shadow4);
+    color: var(--text-color);
+}
+
 .outter {
     margin-top: 20px;
     padding: 12px;
@@ -181,7 +188,7 @@ button:hover {
 
 .delete-book {
     background-color: rgb(197, 40, 40);
-    margin-left: 5px;
+    margin-left: 10px;
     box-shadow: 3px 3px 1px 0px rgb(77, 3, 3);
 }
 
