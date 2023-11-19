@@ -1,17 +1,45 @@
 const bookshelf = [];
 const REFRESH_EVENT = 'refresh_event';
 
+// Storage Key
+const SAVED_EVENT = 'saved-changes';
+const STORAGE_KEY = 'BOOKVAULT';
+
 // Declare needed variable
 const form = document.getElementById('input-book');
 const input_complete = document.getElementById('finish-reading');
 
 // Load Document when content ready
 document.addEventListener('DOMContentLoaded', () => {
+    loadFromStorage();
     form.addEventListener('submit', event => {
         insertInput();
         event.preventDefault(event);
+        document.getElementById('book-title').value = "";
+        document.getElementById('author-input').value = "";
+        document.getElementById('book-release').value = "";
     });
 });
+
+// LocalStorage
+const saveChanges = () => {
+    const parsed = JSON.stringify(bookshelf);
+    localStorage.setItem(STORAGE_KEY, parsed);
+    document.dispatchEvent(new Event(SAVED_EVENT));
+}
+
+// Load from storage
+const loadFromStorage = () => {
+    const data_container = localStorage.getItem(STORAGE_KEY);
+    let data = JSON.parse(data_container);
+
+    if(data !== null ) {
+        for(const item of data) {
+            bookshelf.push(item);
+        }
+    }
+    document.dispatchEvent(new Event(REFRESH_EVENT));
+}
 
 // Function 
 const generateID = () => +new Date;
@@ -54,6 +82,7 @@ const insertInput = () => {
     const convertIntoObject = generateObject(id, input_title, input_author, input_year, isComplete);
     bookshelf.push(convertIntoObject);
     document.dispatchEvent(new Event(REFRESH_EVENT));
+    saveChanges();
 }
 
 const makeList = (bookshelfObject) => {
@@ -125,6 +154,7 @@ const moveToRead = (id) => {
     if(target == null) return;
     target.isComplete = true;
     document.dispatchEvent(new Event(REFRESH_EVENT));
+    saveChanges();
 };
 
 const moveToUnread = (id) => {
@@ -132,6 +162,7 @@ const moveToUnread = (id) => {
     if(target == null) return;
     target.isComplete = false;
     document.dispatchEvent(new Event(REFRESH_EVENT));
+    saveChanges();
 };
 
 const removeBook = (id) => {
@@ -139,8 +170,10 @@ const removeBook = (id) => {
     if(target == null) return;
     bookshelf.splice(target, 1);
     document.dispatchEvent(new Event(REFRESH_EVENT));
+    saveChanges();
 }
 
+// Refreshing Event
 document.addEventListener(REFRESH_EVENT, () => {
     const unread = document.getElementById('unread')
     unread.innerHTML = "";
@@ -156,4 +189,9 @@ document.addEventListener(REFRESH_EVENT, () => {
             unread.append(nodeCreated);
         }
     }
+});
+
+// Save Data Event
+document.addEventListener(SAVED_EVENT, () => {
+    console.log(localStorage.getItem(STORAGE_KEY));
 });
