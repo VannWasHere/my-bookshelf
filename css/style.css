@@ -96,11 +96,14 @@ button:hover {
     width: 100%;
     height: max-content;
     padding: 15px;
-    box-shadow: var(--shadow2);
 }
 
 .content-container>section:not(:nth-child(1)) {
     margin-left: 50px;
+}
+
+.input-section {
+    box-shadow: var(--shadow2);
 }
 
 #input-book>div{
