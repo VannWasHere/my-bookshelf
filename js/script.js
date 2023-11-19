@@ -166,11 +166,14 @@ const moveToUnread = (id) => {
 };
 
 const removeBook = (id) => {
-    const target = getId(id);
-    if(target == null) return;
-    bookshelf.splice(target, 1);
-    document.dispatchEvent(new Event(REFRESH_EVENT));
-    saveChanges();
+    const result = confirm("Are you sure want to delete this book?")
+    if(result) {
+        const target = getId(id);
+        if(target == null) return;
+        bookshelf.splice(target, 1);
+        document.dispatchEvent(new Event(REFRESH_EVENT));
+        saveChanges();
+    }
 }
 
 // Refreshing Event
