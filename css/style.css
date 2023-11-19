@@ -140,7 +140,7 @@ button:hover {
     margin-top: 12px;
 }
 
-.inner {
+.outter {
     margin-top: 20px;
     padding: 12px;
     background-color: var(--third-color);
